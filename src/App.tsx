@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import { ToastContainer } from 'react-toastify';
@@ -19,6 +19,11 @@ import AdminDashboard from './pages/AdminDashboard';
 // @ts-ignore
 import ErrorBoundary from './components/ErrorBoundary';
 import { AuthProvider } from './contexts/AuthContext';
+
+// Determine which router to use
+// Use HashRouter for GitHub Pages, and BrowserRouter for everything else
+const isGitHubPages = window.location.hostname.includes('github.io');
+const Router = isGitHubPages ? HashRouter : BrowserRouter;
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
